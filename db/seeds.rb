@@ -1,10 +1,26 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# Requires
+require 'faker'
+
+# Roles
 
 Role.create!(name: "admin")
 Role.create!(name: "bodegero")
+
+# Users
+@user = User.exists?(email:"kevin@teip.io")
+if !@user
+    User.create!(first_name:"Kevin",
+        last_name: "Mendez",
+        username: Faker::Internet.username,
+        role_id: 1,
+        email: "kevin@teip.io", 
+        password: "secret")
+end
+
+# Wherehause
+
+20.times do |n|
+    Warehause.create!(name: Faker::Name.name, 
+        address: Faker::Address.street_address, phone: Faker::PhoneNumber.cell_phone)
+end
+
