@@ -9,4 +9,8 @@ Rails.application.routes.draw do
     skip_controllers :authorizations, :applications,
       :authorized_applications
   end
+
+  # simple route
+  post 'register/create'
+  
 end
