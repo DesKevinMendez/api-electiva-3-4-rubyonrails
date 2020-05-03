@@ -27,5 +27,6 @@ class User < ApplicationRecord
 
   # Relations
   belongs_to :role
+  has_and_belongs_to_many :warehause
   
 end

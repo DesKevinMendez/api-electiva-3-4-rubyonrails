@@ -1,4 +1,4 @@
-class RolesController < ApplicationController
+class Api::V1::RolesController < ApplicationController
   before_action :set_role, only: [:show, :update, :destroy]
   before_action :doorkeeper_authorize!
   
@@ -19,7 +19,7 @@ class RolesController < ApplicationController
     @role = Role.new(role_params)
 
     if @role.save
-      render json: @role, status: :created, location: @role
+      render json: @role, status: :created
     else
       render json: @role.errors, status: :unprocessable_entity
     end

@@ -1,4 +1,4 @@
-class WarehausesController < ApplicationController
+class Api::V1::WarehausesController < ApplicationController
   before_action :set_warehause, only: [:show, :update, :destroy]
   before_action :doorkeeper_authorize!
   
@@ -19,7 +19,7 @@ class WarehausesController < ApplicationController
     @warehause = Warehause.new(warehause_params)
 
     if @warehause.save
-      render json: @warehause, status: :created, location: @warehause
+      render json: @warehause, status: :created
     else
       render json: @warehause.errors, status: :unprocessable_entity
     end

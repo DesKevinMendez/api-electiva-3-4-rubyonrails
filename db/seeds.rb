@@ -24,3 +24,19 @@ end
         address: Faker::Address.street_address, phone: Faker::PhoneNumber.cell_phone)
 end
 
+
+# Wherehauses and users relationships
+
+user = User.create(first_name:"Kevin",
+    last_name: "Mendez",
+    username: Faker::Internet.username,
+    role_id: 1,
+    email: Faker::Internet.email, 
+    password: "secret")
+
+warehause = Warehause.create(name: Faker::Name.name, 
+        address: Faker::Address.street_address, phone: Faker::PhoneNumber.cell_phone)
+
+user.warehause << warehause
+# Warehause.first.users << User.first
+# User.first.warehause << Warehause.first

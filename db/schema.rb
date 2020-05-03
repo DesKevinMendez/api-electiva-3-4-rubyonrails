@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_02_173133) do
+ActiveRecord::Schema.define(version: 2020_05_03_173645) do
 
   create_table "oauth_access_tokens", force: :cascade do |t|
     t.integer "resource_owner_id"
@@ -48,6 +48,13 @@ ActiveRecord::Schema.define(version: 2020_05_02_173133) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "users_warehauses", id: false, force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "warehause_id", null: false
+    t.index ["user_id", "warehause_id"], name: "index_users_warehauses_on_user_id_and_warehause_id"
+    t.index ["warehause_id", "user_id"], name: "index_users_warehauses_on_warehause_id_and_user_id"
   end
 
   create_table "warehauses", force: :cascade do |t|
