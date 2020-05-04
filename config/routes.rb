@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     namespace :v1 do 
       resources :warehauses
       resources :users, only: [:index, :show]
+      get "users/byrole/:role_id", to: "users#byrole" 
       resources :roles
   
     end

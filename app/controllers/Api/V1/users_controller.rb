@@ -7,6 +7,13 @@ class Api::V1::UsersController < ApplicationController
     render :index
   end
 
+  def byrole
+    @users = User.where(role_id: params[:role_id])
+    render :byrole
+  
+  end
+
+
   def show
     # render json: @user
     render :show
