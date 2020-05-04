@@ -9,6 +9,8 @@ Rails.application.routes.draw do
       resources :users, only: [:index, :show]
       get "users/byrole/:role_id", to: "users#byrole" 
       resources :roles
+      resources :shelves
+      resources :inventories
   
     end
   end

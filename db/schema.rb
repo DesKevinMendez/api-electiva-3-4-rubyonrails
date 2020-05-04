@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_03_173645) do
+ActiveRecord::Schema.define(version: 2020_05_04_152354) do
+
+  create_table "inventories", force: :cascade do |t|
+    t.integer "quantity"
+    t.integer "warehouse_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "oauth_access_tokens", force: :cascade do |t|
     t.integer "resource_owner_id"
@@ -29,6 +36,15 @@ ActiveRecord::Schema.define(version: 2020_05_03_173645) do
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "shelves", force: :cascade do |t|
+    t.string "hall"
+    t.string "shelving"
+    t.string "floor"
+    t.integer "warehouse_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

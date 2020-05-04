@@ -40,3 +40,24 @@ warehouse = Warehouse.create(name: Faker::Name.name,
 user.warehouse << warehouse
 # warehouse.first.users << User.first
 # User.first.warehouse << warehouse.first
+
+# Shelves
+
+20.times do |n|
+    Shelf.create!(
+        hall: Faker::Name.name,
+        shelving: Faker::Name.name,
+        floor: Faker::Name.name,
+        warehouse_id: rand(1..20)
+    )
+end
+
+# Shelves
+
+20.times do |n|
+    Inventorie.create!(
+        quantity: rand(1..20),
+        warehouse_id: rand(1..20)
+    )
+end
+
