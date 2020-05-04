@@ -61,3 +61,11 @@ end
     )
 end
 
+# Relation many to many between shelves and inventories
+ShelvesInventorie.create!(
+    shelf_id: 1,
+    inventorie_id: 1,
+    quantity: rand(1..200)
+)
+
+

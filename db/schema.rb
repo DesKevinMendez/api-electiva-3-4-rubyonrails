@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_04_152354) do
+ActiveRecord::Schema.define(version: 2020_05_04_180214) do
 
   create_table "inventories", force: :cascade do |t|
     t.integer "quantity"
@@ -45,6 +45,14 @@ ActiveRecord::Schema.define(version: 2020_05_04_152354) do
     t.string "shelving"
     t.string "floor"
     t.integer "warehouse_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "shelves_inventories", force: :cascade do |t|
+    t.integer "shelf_id"
+    t.integer "inventorie_id"
+    t.integer "quantity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

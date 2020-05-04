@@ -11,7 +11,8 @@ Rails.application.routes.draw do
       resources :roles
       resources :shelves
       resources :inventories
-  
+      resources :shelves_inventories
+    
     end
   end
 
