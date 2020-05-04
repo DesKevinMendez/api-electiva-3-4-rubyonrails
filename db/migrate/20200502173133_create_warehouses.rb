@@ -1,6 +1,6 @@
-class CreateWarehauses < ActiveRecord::Migration[6.0]
+class CreateWarehouses < ActiveRecord::Migration[6.0]
   def change
-    create_table :warehauses do |t|
+    create_table :warehouses do |t|
       t.string :name
       t.string :address
       t.string :phone

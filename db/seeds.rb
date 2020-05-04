@@ -20,7 +20,7 @@ end
 # Wherehause
 
 20.times do |n|
-    Warehause.create!(name: Faker::Name.name, 
+    Warehouse.create!(name: Faker::Name.name, 
         address: Faker::Address.street_address, phone: Faker::PhoneNumber.cell_phone)
 end
 
@@ -34,9 +34,9 @@ user = User.create(first_name:"Kevin",
     email: Faker::Internet.email, 
     password: "secret")
 
-warehause = Warehause.create(name: Faker::Name.name, 
+warehouse = Warehouse.create(name: Faker::Name.name, 
         address: Faker::Address.street_address, phone: Faker::PhoneNumber.cell_phone)
 
-user.warehause << warehause
-# Warehause.first.users << User.first
-# User.first.warehause << Warehause.first
+user.warehouse << warehouse
+# warehouse.first.users << User.first
+# User.first.warehouse << warehouse.first

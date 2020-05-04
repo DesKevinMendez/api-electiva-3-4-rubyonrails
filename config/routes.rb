@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do 
-      resources :warehauses
+      resources :warehouses
       resources :users, only: [:index, :show]
       get "users/byrole/:role_id", to: "users#byrole" 
       resources :roles

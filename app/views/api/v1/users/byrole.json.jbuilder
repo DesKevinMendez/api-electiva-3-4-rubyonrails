@@ -8,8 +8,8 @@ json.array! @users do |user|
         json.name user.role.name
     end
     
-    json.warehause do 
-        json.array! user.warehause do |ware|
+    json.warehouse do 
+        json.array! user.warehouse do |ware|
             json.name ware.name
             json.address ware.address
         end
