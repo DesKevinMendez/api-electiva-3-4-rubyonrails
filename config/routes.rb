@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       resources :shelves
       resources :inventories
       resources :shelves_inventories
+      resources :departures
     
     end
   end

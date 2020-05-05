@@ -29,4 +29,7 @@ class User < ApplicationRecord
   belongs_to :role
   has_and_belongs_to_many :warehouse
   
+  def fullname
+    self.first_name + ' ' + self.last_name
+  end
 end
