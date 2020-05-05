@@ -17,7 +17,13 @@ Rails.application.routes.draw do
       resources :entries
       resources :entry_details
 
+      resources :product_types
+      resources :providers
+      resources :brands
+      resources :models
       resources :products
+
+      
     end
   end
 

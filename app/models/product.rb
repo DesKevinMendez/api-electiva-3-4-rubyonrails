@@ -1,4 +1,10 @@
 class Product < ApplicationRecord
+
+    # Relations
+    belongs_to :brand
+    belongs_to :provider
+    belongs_to :model
+    belongs_to :product_type
     
     # validations
 

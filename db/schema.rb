@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_05_152231) do
+ActiveRecord::Schema.define(version: 2020_05_05_155854) do
+
+  create_table "brands", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "departure_details", force: :cascade do |t|
     t.integer "departure_id"
@@ -61,6 +67,12 @@ ActiveRecord::Schema.define(version: 2020_05_05_152231) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "models", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "oauth_access_tokens", force: :cascade do |t|
     t.integer "resource_owner_id"
     t.integer "application_id"
@@ -75,6 +87,12 @@ ActiveRecord::Schema.define(version: 2020_05_05_152231) do
     t.index ["token"], name: "index_oauth_access_tokens_on_token", unique: true
   end
 
+  create_table "product_types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.string "product_code"
@@ -82,6 +100,14 @@ ActiveRecord::Schema.define(version: 2020_05_05_152231) do
     t.integer "brand_id"
     t.integer "provider_id"
     t.integer "model_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "providers", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.string "email", default: "", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

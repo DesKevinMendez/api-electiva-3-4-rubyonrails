@@ -128,6 +128,29 @@ end
     )
 end
 
+# Model, Brands, Product type
+
+20.times do |n|
+    Model.create!(
+        name: Faker::Name.name
+    )
+    Brand.create!(
+        name: Faker::Name.name
+    )
+    ProductType.create!(
+        name: Faker::Name.name
+    )
+end
+# Providers
+20.times do |n|
+    Provider.create!(
+        name: Faker::Name.name,
+        address:  Faker::Address.street_address,
+        email: Faker::Internet.email
+    )
+
+end
+
 # Products 
 20.times do |n|
     Product.create!(
