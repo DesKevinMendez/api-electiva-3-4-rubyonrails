@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       resources :departures
       resources :departure_details  
       resources :entries
-
+      resources :entry_details
     end
   end
 

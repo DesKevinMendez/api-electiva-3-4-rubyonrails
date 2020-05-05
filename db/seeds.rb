@@ -11,6 +11,10 @@ def generate_date
         Random.new.rand(1..30))
 end
 
+def generate_price
+    return rand(1..1000.0).round(2)
+end
+
 # Roles
 
 Role.create!(name: "admin")
@@ -97,8 +101,8 @@ end
         departure_id: rand(1..10),
         product_id: rand(1..10),
         quantity: rand(1..200),
-        price: rand(1..1000.0).round(2),
-        subtotal: rand(1..1000.0).round(2)
+        price: generate_price,
+        subtotal: generate_price
     )
 end
 
@@ -109,6 +113,17 @@ end
         warehouse_id: rand(1..20),
         user_id: 1,
         date: "#{generate_date}",
-        total: rand(1.00..2000.00).round(2)
+        total: generate_price
+    )
+end
+
+# Entries detail
+10.times do |n|
+    EntryDetail.create!(
+        entrie_id: rand(1..10),
+        product_id: rand(1..20),
+        quantity: rand(1..1000),
+        price: generate_price,
+        subtotal: generate_price,
     )
 end
