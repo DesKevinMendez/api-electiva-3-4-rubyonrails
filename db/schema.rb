@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_05_022151) do
+ActiveRecord::Schema.define(version: 2020_05_05_152231) do
 
   create_table "departure_details", force: :cascade do |t|
     t.integer "departure_id"
@@ -73,6 +73,17 @@ ActiveRecord::Schema.define(version: 2020_05_05_022151) do
     t.index ["refresh_token"], name: "index_oauth_access_tokens_on_refresh_token", unique: true
     t.index ["resource_owner_id"], name: "index_oauth_access_tokens_on_resource_owner_id"
     t.index ["token"], name: "index_oauth_access_tokens_on_token", unique: true
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.string "product_code"
+    t.integer "product_type_id"
+    t.integer "brand_id"
+    t.integer "provider_id"
+    t.integer "model_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "roles", force: :cascade do |t|

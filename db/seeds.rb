@@ -127,3 +127,15 @@ end
         subtotal: generate_price,
     )
 end
+
+# Products 
+20.times do |n|
+    Product.create!(
+        name: Faker::Name.name,
+        product_code: Faker::Name.name,
+        product_type_id: rand(1..20),
+        brand_id: rand(1..20),
+        provider_id: rand(1..20),
+        model_id: rand(1..20),
+    )
+end
