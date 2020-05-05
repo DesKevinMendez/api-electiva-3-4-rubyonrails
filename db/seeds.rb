@@ -1,6 +1,16 @@
 # Requires
 require 'faker'
 require 'date'
+
+# Helper functions
+
+def generate_date
+    return Date.new(
+        Random.new.rand(2015..2020), 
+        Random.new.rand(1..12), 
+        Random.new.rand(1..30))
+end
+
 # Roles
 
 Role.create!(name: "admin")
@@ -75,15 +85,13 @@ ShelvesInventorie.create!(
         user_id: 1,
         warehouse_id: 1,
         
-        date: "#{Date.new(
-            Random.new.rand(2015..2020), 
-            Random.new.rand(1..12), 
-            Random.new.rand(1..30))}",
+        date: "#{generate_date}",
     
         destination_warehouse_id: 2,
         total: "20",
     )
 end
+# Departure detail
 10.times do |n|
     DepartureDetail.create!(
         departure_id: rand(1..10),
@@ -94,3 +102,13 @@ end
     )
 end
 
+# Entries
+10.times do |n|
+    Entrie.create!(
+        id_document: Faker::Alphanumeric.alpha(number: 20),
+        warehouse_id: rand(1..20),
+        user_id: 1,
+        date: "#{generate_date}",
+        total: rand(1.00..2000.00).round(2)
+    )
+end
