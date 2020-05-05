@@ -23,8 +23,11 @@ class User < ApplicationRecord
                        message: "characters not valid"
                      }
   validates :email, presence: true,
-                  uniqueness: true
-
+                  uniqueness: true,
+                  format: {
+                    with: /\A\S+@.+\.\S+\z/,
+                    message: "email invalid"
+                  }
   # Relations
   belongs_to :role
   has_and_belongs_to_many :warehouse

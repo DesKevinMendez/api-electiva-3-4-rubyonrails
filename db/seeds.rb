@@ -65,69 +65,6 @@ user.warehouse << warehouse
         warehouse_id: rand(1..20)
     )
 end
-
-# Shelves
-
-20.times do |n|
-    Inventorie.create!(
-        quantity: rand(1..20),
-        warehouse_id: rand(1..20)
-    )
-end
-
-# Relation many to many between shelves and inventories
-ShelvesInventorie.create!(
-    shelf_id: 1,
-    inventorie_id: 1,
-    quantity: rand(1..200)
-)
-
-# Departures
-10.times do |n|
-    Departure.create!(
-        id_document: Faker::Alphanumeric.alpha(number: 20),
-        user_id: 1,
-        warehouse_id: 1,
-        
-        date: "#{generate_date}",
-    
-        destination_warehouse_id: 2,
-        total: "20",
-    )
-end
-# Departure detail
-10.times do |n|
-    DepartureDetail.create!(
-        departure_id: rand(1..10),
-        product_id: rand(1..10),
-        quantity: rand(1..200),
-        price: generate_price,
-        subtotal: generate_price
-    )
-end
-
-# Entries
-10.times do |n|
-    Entrie.create!(
-        id_document: Faker::Alphanumeric.alpha(number: 20),
-        warehouse_id: rand(1..20),
-        user_id: 1,
-        date: "#{generate_date}",
-        total: generate_price
-    )
-end
-
-# Entries detail
-10.times do |n|
-    EntryDetail.create!(
-        entrie_id: rand(1..10),
-        product_id: rand(1..20),
-        quantity: rand(1..1000),
-        price: generate_price,
-        subtotal: generate_price,
-    )
-end
-
 # Model, Brands, Product type
 
 20.times do |n|
@@ -160,5 +97,72 @@ end
         brand_id: rand(1..20),
         provider_id: rand(1..20),
         model_id: rand(1..20),
+    )
+end
+
+
+# Shelves
+
+20.times do |n|
+    Inventorie.create!(
+        quantity: rand(1..20),
+        product_id: rand(1..20),
+        warehouse_id: rand(1..20)
+    )
+end
+
+# Relation many to many between shelves and inventories
+ShelvesInventorie.create!(
+    shelf_id: 1,
+    inventorie_id: 1,
+    quantity: rand(1..200)
+)
+
+# Entries
+10.times do |n|
+    Entrie.create!(
+        id_document: Faker::Alphanumeric.alpha(number: 20),
+        warehouse_id: rand(1..20),
+        user_id: 1,
+        date: "#{generate_date}",
+        total: generate_price
+    )
+end
+
+# Entries detail
+10.times do |n|
+    EntryDetail.create!(
+        entrie_id: rand(1..10),
+        product_id: rand(1..20),
+        quantity: rand(1..1000),
+        price: generate_price,
+        subtotal: generate_price,
+    )
+end
+
+
+
+
+# Departures
+10.times do |n|
+    Departure.create!(
+        id_document: Faker::Alphanumeric.alpha(number: 20),
+        user_id: 1,
+        warehouse_id: 1,
+        
+        date: "#{generate_date}",
+    
+        destination_warehouse_id: 2,
+        total: "20",
+    )
+end
+# Departure detail
+10.times do |n|
+    DepartureDetail.create!(
+        departure_id: rand(1..10),
+        product_id: rand(1..10),
+        quantity: rand(1..200),
+        price: generate_price,
+        subtotal: generate_price
     )
 end

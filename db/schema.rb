@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 2020_05_05_155854) do
 
   create_table "inventories", force: :cascade do |t|
     t.integer "quantity"
+    t.integer "product_id"
     t.integer "warehouse_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

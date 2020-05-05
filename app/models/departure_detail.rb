@@ -1,6 +1,7 @@
 class DepartureDetail < ApplicationRecord
     # Relations
     belongs_to :departure
+    belongs_to :product
 
     #Validations
     validates :departure_id, presence: true 

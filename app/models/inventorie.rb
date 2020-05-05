@@ -1,6 +1,7 @@
 class Inventorie < ApplicationRecord
     # Relations
     belongs_to :warehouse
+    belongs_to :product
     
     # Many to many
     has_many :shelvesInventorie
