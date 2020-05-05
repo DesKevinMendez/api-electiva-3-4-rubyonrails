@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       resources :inventories
       resources :shelves_inventories
       resources :departures
-    
+      resources :departure_details  
     end
   end
 

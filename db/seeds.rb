@@ -84,4 +84,13 @@ ShelvesInventorie.create!(
         total: "20",
     )
 end
+10.times do |n|
+    DepartureDetail.create!(
+        departure_id: rand(1..10),
+        product_id: rand(1..10),
+        quantity: rand(1..200),
+        price: rand(1..1000.0).round(2),
+        subtotal: rand(1..1000.0).round(2)
+    )
+end
 

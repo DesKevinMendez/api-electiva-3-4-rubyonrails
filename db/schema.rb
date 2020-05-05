@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_04_185052) do
+ActiveRecord::Schema.define(version: 2020_05_05_000826) do
+
+  create_table "departure_details", force: :cascade do |t|
+    t.integer "departure_id"
+    t.integer "product_id"
+    t.integer "quantity"
+    t.float "price"
+    t.float "subtotal"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "departures", force: :cascade do |t|
     t.string "id_document"
