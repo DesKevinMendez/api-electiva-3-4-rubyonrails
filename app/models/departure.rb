@@ -1,7 +1,4 @@
 class Departure < ApplicationRecord
-
-    # Relations
-    belongs_to :user
     
     # Validates 
     validates :id_document, presence: true

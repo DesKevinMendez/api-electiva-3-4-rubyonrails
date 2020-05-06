@@ -4,11 +4,15 @@ class Api::V1::WarehousesController < ApplicationController
   
   # GET /warehouses
   def index
+    
     @warehouses = Warehouse.all
+    render json: WarehouseSerializer.new(@warehouses).serializable_hash.to_json
+
   end
 
   # GET /warehouses/1
   def show
+    render json: render_warehouse
   end
 
   # POST /warehouses
@@ -16,7 +20,7 @@ class Api::V1::WarehousesController < ApplicationController
     @warehouse = Warehouse.new(warehouse_params)
 
     if @warehouse.save
-      render :show, status: :created
+      render json: render_warehouse, status: :created
     else
       render json: @warehouse.errors, status: :unprocessable_entity
     end
@@ -25,7 +29,7 @@ class Api::V1::WarehousesController < ApplicationController
   # PATCH/PUT /warehouses/1
   def update
     if @warehouse.update(warehouse_params)
-      render :show
+      render json: render_warehouse
     else
       render json: @warehouse.errors, status: :unprocessable_entity
     end
@@ -40,6 +44,10 @@ class Api::V1::WarehousesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_warehouse
       @warehouse = Warehouse.find(params[:id])
+    end
+
+    def render_warehouse
+      return WarehouseSerializer.new(@warehouse).serializable_hash.to_json
     end
 
     # Only allow a trusted parameter "white list" through.

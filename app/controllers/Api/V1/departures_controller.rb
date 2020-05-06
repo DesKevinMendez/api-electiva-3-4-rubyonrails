@@ -6,11 +6,13 @@ class Api::V1::DeparturesController < ApplicationController
   # GET /departures.json
   def index
     @departures = Departure.all
+    render json: DepartureSerializer.new(@departures).serializable_hash.to_json
   end
 
   # GET /departures/1
   # GET /departures/1.json
   def show
+    render json: render_departure
   end
 
   # POST /departures
@@ -19,7 +21,7 @@ class Api::V1::DeparturesController < ApplicationController
     @departure = Departure.new(departure_params)
 
     if @departure.save
-      render :show, status: :created
+      render json: render_departure, status: :created
     else
       render json: @departure.errors, status: :unprocessable_entity
     end
@@ -29,7 +31,7 @@ class Api::V1::DeparturesController < ApplicationController
   # PATCH/PUT /departures/1.json
   def update
     if @departure.update(departure_params)
-      render :show, status: :ok
+      render json: render_departure, status: :ok
     else
       render json: @departure.errors, status: :unprocessable_entity
     end
@@ -45,6 +47,10 @@ class Api::V1::DeparturesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_departure
       @departure = Departure.find(params[:id])
+    end
+
+    def render_departure
+      return DepartureSerializer.new(@departure).serializable_hash.to_json
     end
 
     # Only allow a list of trusted parameters through.

@@ -5,13 +5,12 @@ class Api::V1::RolesController < ApplicationController
   # GET /roles
   def index
     @roles = Role.all
-
-    render json: @roles
+    render json: RoleSerializer.new(@roles).serializable_hash.to_json
   end
 
   # GET /roles/1
   def show
-    render json: @role
+    render json: render_role
   end
 
   # POST /roles
@@ -19,7 +18,7 @@ class Api::V1::RolesController < ApplicationController
     @role = Role.new(role_params)
 
     if @role.save
-      render json: @role, status: :created
+      render json: render_role, status: :created
     else
       render json: @role.errors, status: :unprocessable_entity
     end
@@ -28,7 +27,7 @@ class Api::V1::RolesController < ApplicationController
   # PATCH/PUT /roles/1
   def update
     if @role.update(role_params)
-      render json: @role
+      render json: render_role
     else
       render json: @role.errors, status: :unprocessable_entity
     end
@@ -43,6 +42,10 @@ class Api::V1::RolesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_role
       @role = Role.find(params[:id])
+    end
+
+    def render_role
+      return RoleSerializer.new(@role).serializable_hash.to_json
     end
 
     # Only allow a trusted parameter "white list" through.
