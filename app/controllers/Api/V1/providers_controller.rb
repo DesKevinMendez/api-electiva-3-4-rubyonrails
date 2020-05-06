@@ -6,11 +6,15 @@ class Api::V1::ProvidersController < ApplicationController
   # GET /providers.json
   def index
     @providers = Provider.all
+
+    render json: ProviderSerializer.new(@providers).serializable_hash.to_json
+
   end
 
   # GET /providers/1
   # GET /providers/1.json
   def show
+    render json: render_provider
   end
 
   # POST /providers
@@ -19,7 +23,7 @@ class Api::V1::ProvidersController < ApplicationController
     @provider = Provider.new(provider_params)
 
     if @provider.save
-      render :show, status: :created
+      render json: render_provider, status: :created
     else
       render json: @provider.errors, status: :unprocessable_entity
     end
@@ -29,7 +33,7 @@ class Api::V1::ProvidersController < ApplicationController
   # PATCH/PUT /providers/1.json
   def update
     if @provider.update(provider_params)
-      render :show, status: :ok
+      render json: render_provider, status: :ok
     else
       render json: @provider.errors, status: :unprocessable_entity
     end
@@ -47,6 +51,9 @@ class Api::V1::ProvidersController < ApplicationController
       @provider = Provider.find(params[:id])
     end
 
+    def render_provider
+      return ProviderSerializer.new(@provider).serializable_hash.to_json
+    end
     # Only allow a list of trusted parameters through.
     def provider_params
       params.permit(:name, :address, :email)

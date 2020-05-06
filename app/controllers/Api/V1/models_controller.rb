@@ -6,11 +6,13 @@ class Api::V1::ModelsController < ApplicationController
   # GET /models.json
   def index
     @models = Model.all
+    render json: ModelSerializer.new(@models).serializable_hash.to_json
   end
 
   # GET /models/1
   # GET /models/1.json
   def show
+    render json: render_model
   end
 
   # POST /models
@@ -19,7 +21,7 @@ class Api::V1::ModelsController < ApplicationController
     @model = Model.new(model_params)
 
     if @model.save
-      render :show, status: :created
+      render json: render_model, status: :created
     else
       render json: @model.errors, status: :unprocessable_entity
     end
@@ -29,7 +31,7 @@ class Api::V1::ModelsController < ApplicationController
   # PATCH/PUT /models/1.json
   def update
     if @model.update(model_params)
-      render :show, status: :ok
+      render json: render_model, status: :ok
     else
       render json: @model.errors, status: :unprocessable_entity
     end
@@ -45,6 +47,10 @@ class Api::V1::ModelsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_model
       @model = Model.find(params[:id])
+    end
+
+    def render_model
+      return ModelSerializer.new(@model).serializable_hash.to_json
     end
 
     # Only allow a list of trusted parameters through.

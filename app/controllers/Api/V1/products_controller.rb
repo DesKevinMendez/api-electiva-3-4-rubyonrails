@@ -6,11 +6,13 @@ class Api::V1::ProductsController < ApplicationController
   # GET /products.json
   def index
     @products = Product.all
+    render json: ProductsSerializer.new(@products).serializable_hash.to_json
   end
 
   # GET /products/1
   # GET /products/1.json
   def show
+    render json: render_product
   end
 
   # POST /products
@@ -19,7 +21,7 @@ class Api::V1::ProductsController < ApplicationController
     @product = Product.new(product_params)
 
     if @product.save
-      render :show, status: :created
+      render json: render_product, status: :created
     else
       render json: @product.errors, status: :unprocessable_entity
     end
@@ -29,7 +31,7 @@ class Api::V1::ProductsController < ApplicationController
   # PATCH/PUT /products/1.json
   def update
     if @product.update(product_params)
-      render :show, status: :ok
+      render json: render_product, status: :ok
     else
       render json: @product.errors, status: :unprocessable_entity
     end
@@ -45,6 +47,11 @@ class Api::V1::ProductsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_product
       @product = Product.find(params[:id])
+    end
+
+    def render_product
+      return ProductsSerializer.new(@product).serializable_hash.to_json
+      
     end
 
     # Only allow a list of trusted parameters through.

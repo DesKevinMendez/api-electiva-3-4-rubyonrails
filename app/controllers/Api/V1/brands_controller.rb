@@ -6,11 +6,15 @@ class Api::V1::BrandsController < ApplicationController
   # GET /brands.json
   def index
     @brands = Brand.all
+    json_string = BrandSerializer.new(@brands).serializable_hash.to_json
+    render json: json_string
+
   end
 
   # GET /brands/1
   # GET /brands/1.json
   def show
+    render json: render_brand
   end
 
   # POST /brands
@@ -19,7 +23,7 @@ class Api::V1::BrandsController < ApplicationController
     @brand = Brand.new(brand_params)
 
     if @brand.save
-      render :show, status: :created
+      render json: render_brand, status: :created
     else
       render json: @brand.errors, status: :unprocessable_entity
     end
@@ -29,7 +33,7 @@ class Api::V1::BrandsController < ApplicationController
   # PATCH/PUT /brands/1.json
   def update
     if @brand.update(brand_params)
-      render :show, status: :ok
+      render json: render_brand, status: :ok
     else
       render json: @brand.errors, status: :unprocessable_entity
     end
@@ -47,6 +51,11 @@ class Api::V1::BrandsController < ApplicationController
       @brand = Brand.find(params[:id])
     end
 
+    # Use callbacks for get a single brand
+    def render_brand
+      return BrandSerializer.new(@brand).serializable_hash.to_json
+    end
+    
     # Only allow a list of trusted parameters through.
     def brand_params
       params.permit(:name)
