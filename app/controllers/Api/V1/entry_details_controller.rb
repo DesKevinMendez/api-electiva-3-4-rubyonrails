@@ -6,11 +6,13 @@ class Api::V1::EntryDetailsController < ApplicationController
   # GET /entry_details.json
   def index
     @entry_details = EntryDetail.all
+    render json: EntryDetailSerializer.new(@entry_details).serializable_hash.to_json
   end
 
   # GET /entry_details/1
   # GET /entry_details/1.json
   def show
+    render json: render_entry_detail
   end
 
   # POST /entry_details
@@ -19,7 +21,7 @@ class Api::V1::EntryDetailsController < ApplicationController
     @entry_detail = EntryDetail.new(entry_detail_params)
 
     if @entry_detail.save
-      render :show, status: :created
+      render json:render_entry_detail, status: :created
     else
       render json: @entry_detail.errors, status: :unprocessable_entity
     end
@@ -29,7 +31,7 @@ class Api::V1::EntryDetailsController < ApplicationController
   # PATCH/PUT /entry_details/1.json
   def update
     if @entry_detail.update(entry_detail_params)
-      render :show, status: :ok
+      render json:render_entry_detail, status: :ok
     else
       render json: @entry_detail.errors, status: :unprocessable_entity
     end
@@ -45,6 +47,10 @@ class Api::V1::EntryDetailsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_entry_detail
       @entry_detail = EntryDetail.find(params[:id])
+    end
+
+    def render_entry_detail
+      return EntryDetailSerializer.new(@entry_detail).serializable_hash.to_json
     end
 
     # Only allow a list of trusted parameters through.

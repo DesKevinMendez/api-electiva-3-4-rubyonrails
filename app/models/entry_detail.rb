@@ -1,7 +1,5 @@
 class EntryDetail < ApplicationRecord
 
-    # Relations
-    belongs_to :entrie
 
     # Validates
     validates :entrie_id, presence: true

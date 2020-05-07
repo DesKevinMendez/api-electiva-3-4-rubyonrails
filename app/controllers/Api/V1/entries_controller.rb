@@ -6,11 +6,13 @@ class Api::V1::EntriesController < ApplicationController
   # GET /entries.json
   def index
     @entries = Entrie.all
+    render json: EntrieSerializer.new(@entries).serializable_hash.to_json
   end
 
   # GET /entries/1
   # GET /entries/1.json
   def show
+    render json: render_entry
   end
 
   # POST /entries
@@ -19,7 +21,7 @@ class Api::V1::EntriesController < ApplicationController
     @entry = Entrie.new(entry_params)
 
     if @entry.save
-      render :show, status: :created
+      render json:render_entry, status: :created
     else
       render json: @entry.errors, status: :unprocessable_entity
     end
@@ -29,7 +31,7 @@ class Api::V1::EntriesController < ApplicationController
   # PATCH/PUT /entries/1.json
   def update
     if @entry.update(entry_params)
-      render :show, status: :ok
+      render json:render_entry, status: :ok
     else
       render json: @entry.errors, status: :unprocessable_entity
     end
@@ -47,6 +49,9 @@ class Api::V1::EntriesController < ApplicationController
       @entry = Entrie.find(params[:id])
     end
 
+    def render_entry
+      return EntrieSerializer.new(@entry).serializable_hash.to_json
+    end
     # Only allow a list of trusted parameters through.
     def entry_params
       params.permit(:id_document, :warehouse_id, :user_id, :date, :origin_warehouse_id, :total)

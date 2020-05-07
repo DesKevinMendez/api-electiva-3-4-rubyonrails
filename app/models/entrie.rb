@@ -1,8 +1,5 @@
 class Entrie < ApplicationRecord
 
-    # Relations
-    belongs_to :warehouse
-    belongs_to :user
 
     # Validates 
     validates :id_document, presence: true
