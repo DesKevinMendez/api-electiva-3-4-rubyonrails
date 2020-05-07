@@ -1,6 +1,5 @@
 class Shelf < ApplicationRecord
-    # Relations
-    belongs_to :warehouse
+    
     # Many to many
     has_many :shelvesInventorie
     has_many :inventorie, through: :shelvesInventorie

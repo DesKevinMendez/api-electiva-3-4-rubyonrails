@@ -6,16 +6,13 @@ class Api::V1::ShelvesController < ApplicationController
   # GET /shelves.json
   def index
     @shelves = Shelf.all
-    # render json: {
-    #   shelves: @shelves
-    # }
-    render :index
+    render json: ShelfSerializer.new(@shelves).serializable_hash.to_json
   end
 
   # GET /shelves/1
   # GET /shelves/1.json
   def show
-    render :show
+    render json: render_shelve
   end
 
   # POST /shelves
@@ -26,7 +23,7 @@ class Api::V1::ShelvesController < ApplicationController
     @shelves = Shelf.new(shelf_params)
 
     if @shelves.save
-      render :show, status: :created
+      render json: render_shelve, status: :created
     else
       render json: @shelves.errors, status: :unprocessable_entity
     end
@@ -36,7 +33,7 @@ class Api::V1::ShelvesController < ApplicationController
   # PATCH/PUT /shelves/1.json
   def update
     if @shelves.update(shelf_params)
-      render :show, status: :ok
+      render json: render_shelve, status: :ok
     else
       render json: @shelves.errors, status: :unprocessable_entity
     end
@@ -52,6 +49,10 @@ class Api::V1::ShelvesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_shelf
       @shelves = Shelf.find(params[:id])
+    end
+
+    def render_shelve
+      return ShelfSerializer.new(@shelves).serializable_hash.to_json
     end
 
     # Only allow a list of trusted parameters through.
