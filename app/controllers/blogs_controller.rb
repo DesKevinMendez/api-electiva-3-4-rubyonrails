@@ -22,11 +22,10 @@ class BlogsController < ApplicationController
 
   # PATCH/PUT /blogs/1
   def update
-    if @blog.update(blog_params)
-      render json: render_blog(@blog)
-    else
-      render json: @blog.errors, status: :unprocessable_entity
-    end
+    
+    operation = BlogPost::Update.(params: blog_params)
+    response_operation(operation)
+    
   end
 
   # DELETE /blogs/1
@@ -63,6 +62,6 @@ class BlogsController < ApplicationController
     end
     # Only allow a trusted parameter "white list" through.
     def blog_params
-      params.permit(:content, :title)
+      params.permit(:id, :content, :title)
     end
 end
