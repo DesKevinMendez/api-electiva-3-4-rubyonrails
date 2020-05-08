@@ -4,30 +4,26 @@ class BlogsController < ApplicationController
   # GET /blogs
   def index
     @blogs = Blog.all
-
     render json: BlogSerializer.new(@blogs).serializable_hash.to_json
   end
 
   # GET /blogs/1
   def show
-    render json: render_blog
+    render json: render_blog(@blog)
   end
 
   # POST /blogs
   def create
-    @blog = Blog.new(blog_params)
-
-    if @blog.save
-      render json: render_blog, status: :created, location: @blog
-    else
-      render json: @blog.errors, status: :unprocessable_entity
-    end
+    
+    operation = BlogPost::Create.call(params: blog_params)
+    response_operation(operation)
+    
   end
 
   # PATCH/PUT /blogs/1
   def update
     if @blog.update(blog_params)
-      render json: render_blog
+      render json: render_blog(@blog)
     else
       render json: @blog.errors, status: :unprocessable_entity
     end
@@ -44,13 +40,29 @@ class BlogsController < ApplicationController
       @blog = Blog.find(params[:id])
     end
 
-    def render_blog
+    def response_operation operation
+      if operation.success?
+        # render render_blog operation["model.blog"]
+        render json: {
+          blog: operation["model"]
+        }, status: :created
+  
+      else
+        error = operation["contract.default"].errors.messages
+        render json: {
+          error: error
+        }, status: :bad_request
+      end
+  
+    end
 
-      return BlogSerializer.new(@blog).serializable_hash.to_json
+    def render_blog blog
+
+      return BlogSerializer.new(blog).serializable_hash.to_json
       
     end
     # Only allow a trusted parameter "white list" through.
     def blog_params
-      params.require(:blog).permit(:content, :title)
+      params.permit(:content, :title)
     end
 end

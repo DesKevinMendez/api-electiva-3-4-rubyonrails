@@ -18,6 +18,15 @@ gem 'puma', '~> 4.1'
 
 gem 'fast_jsonapi', '~> 1.7.1', git: 'https://github.com/fast-jsonapi/fast_jsonapi'
 
+# trailblazer
+
+gem 'dry-monads', '1.3.1'
+gem 'dry-validation', '1.5'
+gem 'reform', '2.3.0.rc2'
+gem 'reform-rails', '0.2.0.rc3'
+gem 'trailblazer-operation', '0.6.0'
+gem 'trailblazer-rails', '2.1.7'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
