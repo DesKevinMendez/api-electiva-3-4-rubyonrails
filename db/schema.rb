@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2020_05_05_155854) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "brands", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -155,8 +158,8 @@ ActiveRecord::Schema.define(version: 2020_05_05_155854) do
   end
 
   create_table "users_warehouses", id: false, force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "warehouse_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "warehouse_id", null: false
     t.index ["user_id", "warehouse_id"], name: "index_users_warehouses_on_user_id_and_warehouse_id"
     t.index ["warehouse_id", "user_id"], name: "index_users_warehouses_on_warehouse_id_and_user_id"
   end
