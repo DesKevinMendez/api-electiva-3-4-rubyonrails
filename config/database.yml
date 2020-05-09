@@ -80,6 +80,7 @@ test:
 #
 production:
   <<: *default
-  database: electivaapi34
+  url: <%= ENV['DATABASE_URL'] %>
+  # database: electivaapi34
   # username: myapp
   # password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
