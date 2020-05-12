@@ -8,3 +8,10 @@
 20.times do |n|
     Blog.create!(content: "blog #{n}", title: "title blog #{n}")
 end
+
+
+u = User.create!(name: "Kevin Mendez", email: "kevin@teip.io", username: "deskevinmendez")
+u.tags.create!(name: "taggable user")
+
+b = Blog.first
+b.tags.create!(name: "taggable blog")
