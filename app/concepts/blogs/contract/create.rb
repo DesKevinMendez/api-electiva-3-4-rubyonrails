@@ -2,9 +2,14 @@ module Blog::Contract
     class Create < Reform::Form
       property :content
       property :title
-      
+       
       collection :comments, populate_if_empty: Comment do
         property :comment
+        validation do
+          params do
+            required(:comment).filled
+          end
+        end
       end
 
       validation do

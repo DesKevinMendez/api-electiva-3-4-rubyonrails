@@ -14,14 +14,14 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
-    operation = UserPost::Create.call(params: user_params)
+    operation = UserPost::Create.call(params: params)
     response_operation(operation)
   end
 
   # PATCH/PUT /users/1
   def update
 
-    operation = UserPost::Update.call(params: user_params)
+    operation = UserPost::Update.call(params: params)
     response_operation(operation)
 
   end
@@ -59,8 +59,4 @@ class UsersController < ApplicationController
       
     end
 
-    # Only allow a trusted parameter "white list" through.
-    def user_params
-      params.permit(:id, :name, :email, :username)
-    end
 end

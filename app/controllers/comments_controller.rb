@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
   # POST /comments
   def create
 
-    operation = CommentBlog::Create.call(params: comment_params)
+    operation = CommentBlog::Create.call(params: params)
     response_operation(operation)
     
   end
@@ -24,7 +24,7 @@ class CommentsController < ApplicationController
   # PATCH/PUT /comments/1
   def update
 
-    operation = CommentBlog::Update.(params: blog_params)
+    operation = CommentBlog::Update.(params: params)
     response_operation(operation)
 
   end
@@ -59,10 +59,5 @@ class CommentsController < ApplicationController
         }, status: :bad_request
       end
   
-    end
-
-    # Only allow a trusted parameter "white list" through.
-    def comment_params
-      params.permit(:id, :comment, :blog_id)
     end
 end

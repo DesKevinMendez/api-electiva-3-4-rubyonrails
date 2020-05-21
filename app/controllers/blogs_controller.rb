@@ -15,7 +15,7 @@ class BlogsController < ApplicationController
   # POST /blogs
   def create
     
-    operation = BlogPost::Create.call(params: blog_params)
+    operation = BlogPost::Create.call(params: params)
     response_operation(operation)
     
   end
@@ -23,7 +23,7 @@ class BlogsController < ApplicationController
   # PATCH/PUT /blogs/1
   def update
     
-    operation = BlogPost::Update.(params: blog_params)
+    operation = BlogPost::Update.(params: params)
     response_operation(operation)
     
   end
@@ -60,11 +60,5 @@ class BlogsController < ApplicationController
       return BlogSerializer.new(blog).serializable_hash.to_json
       
     end
-    # Only allow a trusted parameter "white list" through.
-    def blog_params
-      
-      params.permit(:id, :content, :title, comments: [[:comment]])
 
-
-    end
 end
